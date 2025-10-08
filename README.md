@@ -1,46 +1,40 @@
-# Multiplication Practice App
+# Maths Test Web App
 
 ## Summary
-The Multiplication Practice App is a simple static web application designed to help users practice multiplication through a series of 10 randomly generated questions. Users can submit their answers, receive immediate feedback, and generate a new set of questions for continued practice.
+The Maths Test Web App is a static web application designed to provide users with a simple interface for taking math quizzes. Currently, the app has issues displaying scores correctly and requires improvements to its layout for better user experience.
 
 ## Setup (Local)
 To set up the project locally, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/multiplication-practice-app.git
+   git clone https://github.com/24f2004387/Maths_test.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd multiplication-practice-app
+   cd Maths_test
    ```
-3. Open `index.html` in your preferred web browser.
+3. Open the `index.html` file in your preferred web browser.
 
 ## Usage
-1. Upon loading the app, you will see 10 multiplication questions.
-2. Enter your answers in the provided input fields.
-3. Click the "Submit" button to check your answers.
-4. Review the feedback for correct and incorrect answers.
-5. Click "Generate New Questions" to start a new practice session.
+Once the app is running, users can start a math quiz by clicking the "Start Quiz" button. After answering the questions, the score will be displayed. Note that the score display functionality is currently under review.
 
 ## Code Explanation
-- **index.html**: The main HTML file containing the structure of the app.
-- **styles.css**: Contains styles for the app to enhance user experience.
-- **script.js**: Handles the logic for generating questions, checking answers, and updating the UI.
-
-Key functions in `script.js`:
-- `generateQuestions()`: Creates 10 random multiplication questions.
-- `checkAnswers()`: Compares user inputs with correct answers and provides feedback.
-- `resetQuestions()`: Resets the input fields and generates a new set of questions.
+The project consists of HTML, CSS, and JavaScript files. Key components include:
+- **index.html**: The main structure of the web app.
+- **styles.css**: Contains styles for layout and design improvements.
+- **script.js**: Handles quiz logic, score calculation, and user interactions.
 
 ## Deployment (GitHub Pages)
 To deploy the app using GitHub Pages, follow these steps:
 
-1. Push your code to a GitHub repository.
-2. Go to the repository settings.
+1. Push your changes to the `main` branch of your repository.
+2. Go to the repository settings on GitHub.
 3. Scroll down to the "GitHub Pages" section.
-4. Select the branch you want to deploy (usually `main` or `master`).
-5. Click "Save" and your app will be available at `https://yourusername.github.io/repository-name`.
+4. Select the `main` branch as the source and save.
+5. Your app will be available at `https://<username>.github.io/<repository-name>/`.
+
+For this project, the live URL is: [https://24f2004387.github.io/Maths_test/](https://24f2004387.github.io/Maths_test/)
 
 ## License (MIT)
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

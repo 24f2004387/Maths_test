@@ -1,42 +1,20 @@
-const generateQuestions = () => {
-    const questions = [];
-    for (let i = 0; i < 10; i++) {
-        const num1 = Math.floor(Math.random() * 10);
-        const num2 = Math.floor(Math.random() * 10);
-        questions.push({ question: `${num1} x ${num2}`, answer: num1 * num2 });
-    }
-    return questions;
-};
+document.addEventListener('DOMContentLoaded', () => {
+    const totalSalesElement = document.getElementById('total-sales');
+    const githubCreatedAtElement = document.getElementById('github-created-at');
 
-const displayQuestions = (questions) => {
-    const questionsDiv = document.getElementById('questions');
-    questionsDiv.innerHTML = '';
-    questions.forEach((q, index) => {
-        questionsDiv.innerHTML += `
-            <div class="mb-2">
-                <label>${q.question} = </label>
-                <input type="number" class="form-control" id="answer-${index}" required>
-            </div>
-        `;
+    // Simulate fetching data
+    const fetchData = async () => {
+        const totalSales = await fetch('data.json').then(res => res.json()).then(data => data.totalSales);
+        const githubCreatedAt = await fetch('data.json').then(res => res.json()).then(data => data.githubCreatedAt);
+
+        totalSalesElement.textContent = totalSales;
+        githubCreatedAtElement.textContent = new Date(githubCreatedAt).toLocaleDateString();
+    };
+
+    fetchData().then(() => {
+        document.title = "Score Display - Updated";
+        document.querySelectorAll('pre code').forEach((block) => {
+            hljs.highlightElement(block);
+        });
     });
-};
-
-const checkAnswers = (questions) => {
-    let correct = 0;
-    questions.forEach((q, index) => {
-        const userAnswer = parseInt(document.getElementById(`answer-${index}`).value);
-        if (userAnswer === q.answer) correct++;
-    });
-    document.getElementById('results').innerHTML = `You got ${correct} out of ${questions.length} correct!`;
-};
-
-document.getElementById('quiz-form').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const questions = generateQuestions();
-    checkAnswers(questions);
-    displayQuestions(questions);
 });
-
-// Initial load
-const initialQuestions = generateQuestions();
-displayQuestions(initialQuestions);
