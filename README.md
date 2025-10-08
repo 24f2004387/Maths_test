@@ -1,10 +1,10 @@
 # Maths Quiz App
 
 ## Summary
-The Maths Quiz App is a static web application designed to challenge users with a series of 10 math questions. The app features a user-friendly layout, providing immediate feedback on answers and generating new questions seamlessly.
+The Maths Quiz App is a single-page application that presents users with 10 random arithmetic questions (addition, subtraction, multiplication). Built with Bootstrap 5, the app features a clean, centered card layout. Users can select answers from multiple-choice options, receive immediate feedback, and view their final score at the end.
 
 ## Setup (Local)
-To set up the Maths Quiz App locally, follow these steps:
+To run the app locally, follow these steps:
 
 1. Clone the repository:
    ```bash
@@ -17,28 +17,30 @@ To set up the Maths Quiz App locally, follow these steps:
 3. Open `index.html` in your preferred web browser.
 
 ## Usage
-1. Start the quiz by clicking the "Start" button.
-2. Answer each question by selecting the correct option.
-3. After each question, receive immediate feedback on whether your answer was correct or wrong.
-4. Continue until all 10 questions have been answered.
-5. Review your score at the end of the quiz.
+1. Start the app by opening `index.html`.
+2. Answer each question by selecting one of the four options (A, B, C, D).
+3. Receive immediate feedback on your answer.
+4. After answering all questions, view your final score summary.
 
 ## Code Explanation
-The application is built using HTML, CSS, and JavaScript. Key components include:
-
-- **HTML**: Structure of the quiz interface.
-- **CSS**: Styling for a visually appealing layout.
+The app utilizes JavaScript to generate random arithmetic questions and manage user interactions. Key components include:
+- **HTML**: Structure of the quiz card and buttons.
+- **CSS**: Styling with Bootstrap 5 for a responsive layout.
 - **JavaScript**: Logic for question generation, answer validation, and score tracking.
 
-The quiz questions are stored in an array, and the app dynamically updates the DOM to display new questions and feedback.
+Key DOM checks:
+- Ensure the quiz card is present: `!!document.querySelector('#quiz-card')`
+- Ensure the next button is functional: `!!document.querySelector('#next-btn')`
+- Ensure the score display is present: `!!document.querySelector('#score')`
 
 ## Deployment (GitHub Pages)
-To deploy the Maths Quiz App on GitHub Pages:
+To deploy the app using GitHub Pages, follow these steps:
 
-1. Push your code to the `main` branch of your GitHub repository.
-2. Navigate to the repository settings.
-3. Under the "Pages" section, select the `main` branch as the source.
-4. Your app will be available at `https://<your-username>.github.io/Maths_test/`.
+1. Push your local changes to the `main` branch of your GitHub repository.
+2. Navigate to the repository settings on GitHub.
+3. Scroll down to the "GitHub Pages" section.
+4. Select the `main` branch as the source and save.
+5. Access your live app at: [https://24f2004387.github.io/Maths_test/](https://24f2004387.github.io/Maths_test/)
 
 ## License (MIT)
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

@@ -1,52 +1,52 @@
-const questions = [
-    { question: "5 + 3", answer: 8 },
-    { question: "10 - 4", answer: 6 },
-    { question: "3 * 7", answer: 21 },
-    { question: "12 / 4", answer: 3 },
-    { question: "9 + 6", answer: 15 },
-    { question: "15 - 5", answer: 10 },
-    { question: "8 * 2", answer: 16 },
-    { question: "20 / 5", answer: 4 },
-    { question: "6 + 7", answer: 13 },
-    { question: "14 - 6", answer: 8 }
-];
-
+const totalQuestions = 10;
 let currentQuestionIndex = 0;
+let score = 0;
+
+const questions = Array.from({ length: totalQuestions }, () => generateQuestion());
+
+function generateQuestion() {
+    const a = Math.floor(Math.random() * 10);
+    const b = Math.floor(Math.random() * 10);
+    const operation = Math.random() < 0.5 ? '+' : '-';
+    const answer = operation === '+' ? a + b : a - b;
+    const options = generateOptions(answer);
+    return { question: `${a} ${operation} ${b}`, answer, options };
+}
+
+function generateOptions(correctAnswer) {
+    const options = new Set([correctAnswer]);
+    while (options.size < 4) {
+        options.add(Math.floor(Math.random() * 20));
+    }
+    return Array.from(options).sort(() => Math.random() - 0.5);
+}
 
 function loadQuestion() {
-    const quizDiv = document.getElementById('quiz');
-    quizDiv.innerHTML = `<h2>${questions[currentQuestionIndex].question}</h2>
-                         <input type="number" id="user-answer" class="form-control" placeholder="Your answer">
-                         <button id="submit" class="btn btn-success mt-2">Submit</button>`;
-    document.getElementById('next').style.display = 'none';
+    const { question, options } = questions[currentQuestionIndex];
+    document.querySelector('#question').textContent = question;
+    document.querySelector('#options').innerHTML = options.map((opt, index) => 
+        `<button class="btn btn-outline-secondary m-1" onclick="checkAnswer(${opt === questions[currentQuestionIndex].answer}, '${opt}')">${opt}</button>`
+    ).join('');
+    document.querySelector('#question-number').textContent = currentQuestionIndex + 1;
 }
 
-function checkAnswer() {
-    const userAnswer = parseInt(document.getElementById('user-answer').value);
-    const resultDiv = document.getElementById('result');
-    if (userAnswer === questions[currentQuestionIndex].answer) {
-        resultDiv.innerHTML = "<p class='text-success'>Correct!</p>";
-    } else {
-        resultDiv.innerHTML = "<p class='text-danger'>Wrong! The correct answer is " + questions[currentQuestionIndex].answer + ".</p>";
-    }
-    document.getElementById('next').style.display = 'block';
-}
-
-document.getElementById('quiz').addEventListener('click', function(e) {
-    if (e.target.id === 'submit') {
-        checkAnswer();
-    }
-});
-
-document.getElementById('next').addEventListener('click', function() {
+function checkAnswer(isCorrect, selectedOption) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${isCorrect ? 'alert-success' : 'alert-danger'}`;
+    alertDiv.textContent = isCorrect ? 'Correct!' : `Wrong! The correct answer was ${questions[currentQuestionIndex].answer}.`;
+    document.querySelector('#score').innerHTML = '';
+    document.querySelector('#score').appendChild(alertDiv);
+    if (isCorrect) score++;
     currentQuestionIndex++;
-    if (currentQuestionIndex < questions.length) {
-        loadQuestion();
-        document.getElementById('result').innerHTML = '';
+    if (currentQuestionIndex < totalQuestions) {
+        setTimeout(loadQuestion, 1000);
     } else {
-        document.getElementById('quiz').innerHTML = "<h2>Quiz Completed!</h2>";
-        document.getElementById('next').style.display = 'none';
+        setTimeout(showFinalScore, 1000);
     }
-});
+}
 
-loadQuestion();
+function showFinalScore() {
+    document.querySelector('#quiz-card').innerHTML = `<h5 class="card-title">Quiz Finished!</h5><p>Your score: ${score} out of ${totalQuestions}</p>`;
+}
+
+document.addEventListener('DOMContentLoaded', loadQuestion);
